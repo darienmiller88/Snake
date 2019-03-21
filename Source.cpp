@@ -25,76 +25,15 @@ void whichDirection(SnakeHead &head, SnakeBody &snake, char direction, int dista
 int main() {
 	gameModeChoice userChoice;
 	string finalMessage;
-	//createMovableCursor(userChoice);
-	//system("cls");
+	createMovableCursor(userChoice);
+	system("cls");
 	
 	createMap();
-	cpuMove();
-	//playGame(userChoice, finalMessage);
+	playGame(userChoice, finalMessage);
 	
 	gotoxy(10, 20);
 	cout << finalMessage;
 	
-}
-
-void whichDirection(SnakeHead &head, SnakeBody &snake, char direction, int distance) {
-	head.cpuMove(direction);
-	for (size_t i = 0; i < distance; i++) {
-		cout << snake << endl;
-		head.update();
-		Sleep(100);
-	}
-}
-
-void cpuMove() {
-	int foodX, foodY;
-	SnakeBody snake('s', NUM_COLUMNS / 2, NUM_ROWS / 2, 3);
-	SnakeHead &head = snake.getSnakeHead();
-	enum direction{UP = 'w', DOWN = 's', LEFT = 'a', RIGHT = 'd'};
-
-	createFood(foodX, foodY, snake.getTail());
-	int xDistance = foodX - head.getX();
-	int yDistance = foodY - head.getY();
-	
-	//if the food object is to the right of the snake head, move the snake right
-
-	while (!head.collidedWithWall(NUM_COLUMNS, NUM_ROWS)) {
-		if (xDistance > 0 and yDistance == 0)
-			whichDirection(head, snake, RIGHT, xDistance);
-
-		//else if(xDistance < 0)
-
-
-		//if the food object is to the right of the snake head and below, move the snake right, and then downwards.
-		else if (xDistance > 0 and yDistance > 0) {
-			whichDirection(head, snake, RIGHT, xDistance);
-			whichDirection(head, snake, DOWN, yDistance);
-		}
-
-		//if the food object is to the right of the snake head and above, move the snake right, and then upwards.
-		else if (xDistance > 0 and yDistance < 0) {
-			whichDirection(head, snake, RIGHT, xDistance);
-			whichDirection(head, snake, UP, abs(yDistance));
-		}
-
-		//if the food object is to the left of the snake head and above, move the snake upwards, and then left.
-		else if (xDistance < 0 and yDistance < 0) {
-			whichDirection(head, snake, UP, abs(yDistance));
-			whichDirection(head, snake, LEFT, abs(xDistance));
-		}
-
-		//if the food object is to the left of the snake head and below, move the snake down, and then left.
-		else if (xDistance < 0 and yDistance > 0) {
-			whichDirection(head, snake, DOWN, yDistance);
-			whichDirection(head, snake, LEFT, abs(xDistance));
-		}
-
-		createFood(foodX, foodY, snake.getTail());
-		int xDistance = foodX - head.getX();
-		int yDistance = foodY - head.getY();
-	}
-	
-
 }
 
 void playGame(const gameModeChoice &userChoice, string &finalMessage) {
