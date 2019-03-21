@@ -26,19 +26,6 @@ void SnakeHead::flickerSnakeHead(){
 	}
 }
 
-void SnakeHead::cpuMove(char moveDirection){
-	if (moveDirection == UP and direction != DOWN)
-		ySpeed = -1, xSpeed = 0, direction = UP;
-	else if (moveDirection == DOWN and direction != UP)
-		ySpeed = 1, xSpeed = 0, direction = DOWN;
-	else if (moveDirection == RIGHT and direction != LEFT)
-		xSpeed = 1, ySpeed = 0, direction = RIGHT;
-	else if (moveDirection == LEFT and direction != RIGHT)
-		xSpeed = -1, ySpeed = 0, direction = LEFT;
-	direction = movement();
-	//update();
-}
-
 void SnakeHead::phaseThroughWall(int rightBorder, int bottomBorder){
 	if (x == rightBorder)
 		x = 1;
